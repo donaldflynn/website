@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {Helmet} from "react-helmet";
 
 import {faMailBulk} from "@fortawesome/free-solid-svg-icons";
@@ -28,7 +28,7 @@ const Homepage = () => {
 		const handleScroll = () => {
 			let scroll = Math.round(window.pageYOffset, 2);
 
-			let newLogoSize = 80 - (scroll * 4) / 10;
+			let newLogoSize = 80 - scroll * 0.38;
 
 			if (newLogoSize < oldLogoSize) {
 				if (newLogoSize > 40) {
@@ -37,6 +37,8 @@ const Homepage = () => {
 					setStayLogo(false);
 				} else {
 					setStayLogo(true);
+					setLogoSize(40)
+					setOldLogoSize(40)
 				}
 			} else {
 				setLogoSize(newLogoSize);
@@ -50,15 +52,23 @@ const Homepage = () => {
 
 	const currentSEO = SEO.find((item) => item.page === "home");
 
-	const logoStyle = {
-		display: "flex",
-		position: stayLogo ? "fixed" : "relative",
-		top: stayLogo ? "3vh" : "auto",
-		zIndex: 999,
-		border: stayLogo ? "1px solid white" : "none",
-		borderRadius: stayLogo ? "50%" : "none",
-		boxShadow: stayLogo ? "0px 4px 10px rgba(0, 0, 0, 0.25)" : "none",
-	};
+	const logoStyle = useMemo(() => (
+			{
+				display: "flex",
+				position: stayLogo ? "fixed" : "relative",
+				top: stayLogo ? "3vh" : "auto",
+				zIndex: 999,
+				border: stayLogo ? "1px solid white" : "none",
+				borderRadius: stayLogo ? "50%" : "none",
+				boxShadow: stayLogo ? "0px 4px 10px rgba(0, 0, 0, 0.25)" : "none",
+			}
+		), [stayLogo]
+	)
+
+	const placeHolderDivStyle = useMemo(() => ({
+		height: stayLogo && logoSize
+	}), [logoSize, stayLogo])
+
 
 	return (
 		<React.Fragment>
@@ -78,6 +88,7 @@ const Homepage = () => {
 						<div style={logoStyle}>
 							<Logo width={logoSize} link={false} />
 						</div>
+						<div style={placeHolderDivStyle}/>
 					</div>
 
 					<div className="homepage-container">
