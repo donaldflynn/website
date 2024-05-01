@@ -49,7 +49,7 @@ const Contact = () => {
 							suggestions. If you have a specific question or
 							comment, please feel free to email me directly at
 							&nbsp;{" "}
-							<a href={`mailto:${INFO.main.email}`}>
+							<a href={`mailto:${INFO.main.email}`} className={"html-link"}>
 								{INFO.main.email}
 							</a>
 							. I make an effort to respond to all messages within
@@ -58,6 +58,7 @@ const Contact = () => {
 							LinkedIn, you can find me on{" "}
 							<a
 								href={INFO.socials.linkedin}
+								className={"html-link"}
 								target="_blank"
 								rel="noreferrer"
 							>
