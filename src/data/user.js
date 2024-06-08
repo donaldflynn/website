@@ -3,7 +3,7 @@ const INFO = {
 		title: "Donald Flynn",
 		name: "Donald Flynn",
 		email: "donaldflynn@hotmail.co.uk",
-		logo: "../logo.png",
+		logo: "../logo.jpg",
 	},
 
 	socials: {
